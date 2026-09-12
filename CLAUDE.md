@@ -3,6 +3,7 @@
 This file gives Claude Code the working context and rules for this repository.
 
 ## Project purpose
+
 This repository is Pedro Bastos's personal engineering portfolio, and
 deliberately also a long-term learning project for using Claude Code, skills,
 and agents effectively as part of senior-level software engineering practice.
@@ -13,6 +14,7 @@ The site hosts: CV, professional experience, projects, engineering case
 studies, and technical writing.
 
 ## Development workflow
+
 Claude Code should not implement substantial changes immediately.
 
 For non-trivial work, follow this sequence:
@@ -32,6 +34,7 @@ Do not introduce dependencies when the existing stack can reasonably solve
 the problem.
 
 ## Architecture
+
 See `docs/adr/` for the full decision record. Current baseline (ADR-0001):
 
 - Astro, static-site generation, deployed to Cloudflare Pages via GitHub git
@@ -54,6 +57,7 @@ change the shape of the app, hosting changes, adding a backend, etc.) should
 be proposed as a new ADR before implementation, not decided inline.
 
 ## Engineering requirements (non-negotiable)
+
 - **Accessibility**: semantic HTML by default; every image has meaningful alt
   text (or empty alt for decorative images); full keyboard navigability;
   sufficient color contrast. Treat this as a correctness requirement, not a
@@ -70,6 +74,7 @@ be proposed as a new ADR before implementation, not decided inline.
   information is missing, ask rather than filling a plausible-sounding gap.
 
 ## Component conventions
+
 - Prefer Astro components for static UI.
 - Before introducing React, explain the specific interactivity requirement
   that justifies shipping client-side JavaScript.
@@ -77,6 +82,7 @@ be proposed as a new ADR before implementation, not decided inline.
   reuse, or maintainability in the current codebase.
 
 ## Conventions
+
 - **Language**: TypeScript for all code, data, and content schemas.
 - **Content schemas**: defined once in `src/content/config.ts` (Astro
   Content Collections). Treat that file as the source of truth for
@@ -86,24 +92,30 @@ be proposed as a new ADR before implementation, not decided inline.
   page, `/cv`, and any export/print view all read from these files rather
   than embedding content directly.
 - **Package manager**: pnpm.
-- **Linting/formatting**: ESLint + Prettier; accessibility linting
-  (jsx-a11y / astro eslint plugin) is part of the standard lint pass, not
-  optional.
+- **Linting/formatting**: Oxlint + Prettier. Oxlint is the standard linting
+  tool for TypeScript/JavaScript and Astro frontmatter. Astro template/markup
+  linting is currently not covered by Oxlint and is therefore not silently
+  assumed to be covered. If template-level linting becomes necessary as the
+  site grows, evaluate `eslint-plugin-astro` or another appropriate solution
+  before introducing it.
 - **Commits**: concise, imperative, conventional-style messages (e.g.
   `feat: add project detail page`, `chore: ...`), matching the existing repo
   history.
 
 ## Commands
+
 To be filled in once the project is scaffolded (Phase 1). Expected standard
-scripts: `dev`, `build`, `preview`, `lint`, `typecheck`, `test`.
+scripts: `dev`, `build`, `preview`, `lint`, `typecheck`.
 
 ## Deployment
+
 Cloudflare Pages, connected directly to this GitHub repository. `main`
 deploys to production; pull requests get automatic preview deployments. Do
 not introduce a separate custom deploy pipeline — GitHub Actions (if used) is
 for pre-merge checks only (lint/typecheck/test), not for deployment.
 
 ## Explicitly out of scope (do not add without a new ADR)
+
 - CMS or headless content backend
 - Micro-frontend architecture
 - Monorepo tooling (Nx, Turborepo, etc.)
