@@ -12,6 +12,25 @@ doing well and worth documenting, not just worth shipping.
 The site hosts: CV, professional experience, projects, engineering case
 studies, and technical writing.
 
+## Development workflow
+Claude Code should not implement substantial changes immediately.
+
+For non-trivial work, follow this sequence:
+
+1. Understand the requirement and constraints.
+2. Inspect the existing code and relevant documentation.
+3. Propose an implementation approach.
+4. Explain important trade-offs and alternatives.
+5. Wait for approval when the change affects architecture or introduces
+   meaningful complexity.
+6. Implement the smallest appropriate solution.
+7. Run the relevant validation commands.
+8. Summarize what changed, why, and any remaining risks.
+
+Do not rewrite working code without a clear reason.
+Do not introduce dependencies when the existing stack can reasonably solve
+the problem.
+
 ## Architecture
 See `docs/adr/` for the full decision record. Current baseline (ADR-0001):
 
