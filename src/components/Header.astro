@@ -1,6 +1,28 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const currentLocale = Astro.currentLocale ?? 'pt';
 ---
 
 <header class="mx-auto max-w-2xl px-6 py-6">
-	<a href="/" class="text-lg font-semibold text-slate-900">Pedro Bastos</a>
+	<a href={getRelativeLocaleUrl(currentLocale, '/')} class="text-lg font-semibold text-slate-900">
+		Pedro Bastos
+	</a>
+	<nav aria-label="Language" class="mt-2 flex gap-2 text-sm">
+		<a
+			href={getRelativeLocaleUrl('pt', '/')}
+			aria-current={currentLocale === 'pt' ? 'page' : undefined}
+			class={currentLocale === 'pt' ? 'font-semibold underline' : 'text-slate-600'}
+		>
+			PT
+		</a>
+		<span aria-hidden="true">|</span>
+		<a
+			href={getRelativeLocaleUrl('en', '/')}
+			aria-current={currentLocale === 'en' ? 'page' : undefined}
+			class={currentLocale === 'en' ? 'font-semibold underline' : 'text-slate-600'}
+		>
+			EN
+		</a>
+	</nav>
 </header>
