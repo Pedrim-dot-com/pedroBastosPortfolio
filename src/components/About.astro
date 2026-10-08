@@ -1,0 +1,32 @@
+---
+const locale = Astro.currentLocale === "en" ? "en" : "pt";
+
+const copy = {
+	pt: {
+		heading: "Sobre",
+		paragraphOne:
+			"Enquanto Frontend Engineer, o meu trabalho tem evoluído de um foco inicial em React Native para React e TypeScript em aplicações web — mas não se limita à implementação de UI. Faço também investigação de problemas em produção, analiso fluxos entre Frontend e Backend e o comportamento das APIs, e utilizo informação de observabilidade, como logs e traces, para identificar a origem dos problemas.",
+		paragraphTwo:
+			"Leio e analiso regularmente código Java do Backend e, ocasionalmente, faço alterações, continuando a aprofundar o meu conhecimento nesta área. O desenvolvimento assistido por IA faz também parte do meu processo de trabalho e de aprendizagem: uso o Claude e o Claude Code para analisar código, investigar problemas técnicos, rever e melhorar soluções, raciocinar sobre bugs e abordagens de implementação, e apoiar o desenvolvimento de novas funcionalidades.",
+	},
+	en: {
+		heading: "About",
+		paragraphOne:
+			"As a Frontend Engineer, my work has evolved from an initial focus on React Native toward React and TypeScript on web applications — but it isn't limited to implementing UI. I also investigate production issues, analyze the flow between Frontend and Backend and API behavior, and use observability information, such as logs and traces, to identify their root cause.",
+		paragraphTwo:
+			"I regularly read and analyze Java Backend code and occasionally make changes, continuing to grow my knowledge in that area. AI-assisted development is also part of my workflow and learning: I use Claude and Claude Code to analyze code, investigate technical problems, review and improve solutions, reason through bugs and implementation approaches, and support the development of new features.",
+	},
+}[locale];
+---
+
+<section id="about" aria-labelledby="about-heading" class="mx-auto max-w-3xl border-t border-platinum/15 px-6 py-20 sm:py-24">
+	<h2 id="about-heading" class="font-display text-2xl font-semibold text-parchment sm:text-3xl">
+		{copy.heading}
+	</h2>
+	<p class="mt-6 max-w-prose text-base leading-relaxed text-taupe sm:text-lg">
+		{copy.paragraphOne}
+	</p>
+	<p class="mt-4 max-w-prose text-base leading-relaxed text-taupe sm:text-lg">
+		{copy.paragraphTwo}
+	</p>
+</section>
