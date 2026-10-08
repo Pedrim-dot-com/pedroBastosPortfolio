@@ -2,23 +2,27 @@
 const locale = Astro.currentLocale === "en" ? "en" : "pt";
 
 const copy = {
-  pt: {
-    title: "Frontend Engineer",
-    intro:
-      "Atualmente na Celfocus, a trabalhar na Vodafone One Experience. Comecei o meu percurso com React Native e hoje trabalho principalmente com React e TypeScript em aplicações web, enquanto aprofundo os meus conhecimentos de Java e Backend.",
-  },
-  en: {
-    title: "Frontend Engineer",
-    intro:
-      "Currently at Celfocus, working on Vodafone One Experience. I started my career with React Native and now work mainly with React and TypeScript on web applications, while expanding my knowledge of Java and Backend development.",
-  },
+	pt: {
+		title: "Frontend Engineer",
+		intro:
+			"Atualmente na Celfocus, a trabalhar na Vodafone One Experience. Comecei o meu percurso com React Native e hoje trabalho principalmente com React e TypeScript em aplicações web, enquanto aprofundo os meus conhecimentos de Java e Backend.",
+	},
+	en: {
+		title: "Frontend Engineer",
+		intro:
+			"Currently at Celfocus, working on Vodafone One Experience. I started my career with React Native and now work mainly with React and TypeScript on web applications, while expanding my knowledge of Java and Backend development.",
+	},
 }[locale];
 ---
 
-<section class="mx-auto max-w-2xl px-6 py-24">
-  <h1 class="text-4xl font-bold text-slate-900 sm:text-5xl">Pedro Bastos</h1>
-  <p class="mt-2 text-xl text-slate-600 sm:text-2xl">{copy.title}</p>
-  <p class="mt-6 max-w-prose text-base text-slate-600 sm:text-lg">
-    {copy.intro}
-  </p>
+<section class="mx-auto max-w-3xl px-6 py-28 sm:py-32">
+	<h1 class="font-display text-4xl font-semibold leading-tight text-parchment md:text-7xl">
+		Pedro Bastos
+	</h1>
+	<p class="mt-4 text-sm font-medium uppercase tracking-widest text-taupe sm:text-base">
+		{copy.title}
+	</p>
+	<p class="mt-6 max-w-prose text-base leading-relaxed text-taupe sm:text-lg">
+		{copy.intro}
+	</p>
 </section>

@@ -1,26 +1,37 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getRelativeLocaleUrl } from "astro:i18n";
 
-const currentLocale = Astro.currentLocale ?? 'pt';
+const currentLocale = Astro.currentLocale ?? "pt";
 ---
 
-<header class="mx-auto max-w-2xl px-6 py-6">
-	<a href={getRelativeLocaleUrl(currentLocale, '/')} class="text-lg font-semibold text-slate-900">
+<header class="mx-auto flex max-w-3xl items-center justify-between border-b border-platinum/15 px-6 py-8">
+	<a
+		href={getRelativeLocaleUrl(currentLocale, "/")}
+		class="text-lg font-semibold tracking-wide text-parchment focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-platinum"
+	>
 		Pedro Bastos
 	</a>
-	<nav aria-label="Language" class="mt-2 flex gap-2 text-sm">
+	<nav aria-label="Language" class="flex items-center gap-2 text-sm">
 		<a
-			href={getRelativeLocaleUrl('pt', '/')}
-			aria-current={currentLocale === 'pt' ? 'page' : undefined}
-			class={currentLocale === 'pt' ? 'font-semibold underline' : 'text-slate-600'}
+			href={getRelativeLocaleUrl("pt", "/")}
+			aria-current={currentLocale === "pt" ? "page" : undefined}
+			class={`transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-platinum ${
+				currentLocale === "pt"
+					? "text-parchment underline underline-offset-4"
+					: "text-taupe hover:text-platinum hover:underline hover:underline-offset-4"
+			}`}
 		>
 			PT
 		</a>
-		<span aria-hidden="true">|</span>
+		<span aria-hidden="true" class="text-taupe">|</span>
 		<a
-			href={getRelativeLocaleUrl('en', '/')}
-			aria-current={currentLocale === 'en' ? 'page' : undefined}
-			class={currentLocale === 'en' ? 'font-semibold underline' : 'text-slate-600'}
+			href={getRelativeLocaleUrl("en", "/")}
+			aria-current={currentLocale === "en" ? "page" : undefined}
+			class={`transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-platinum ${
+				currentLocale === "en"
+					? "text-parchment underline underline-offset-4"
+					: "text-taupe hover:text-platinum hover:underline hover:underline-offset-4"
+			}`}
 		>
 			EN
 		</a>
