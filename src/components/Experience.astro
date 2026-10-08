@@ -1,0 +1,93 @@
+---
+import { experience } from "../data/experience";
+
+const locale = Astro.currentLocale === "en" ? "en" : "pt";
+
+const copy = {
+	pt: {
+		heading: "Experiência",
+		present: "Presente",
+	},
+	en: {
+		heading: "Experience",
+		present: "Present",
+	},
+}[locale];
+
+const intlLocale = locale === "en" ? "en-GB" : "pt-PT";
+
+// Intl's built-in "short" month style is inconsistent across these two locales
+// (pt-PT collapses to a numeric month, en-GB gives "Sept" rather than "Sep"), so
+// the compact label is derived from the reliable "long" format instead: take the
+// first three characters of the locale's own month name (already correctly cased
+// and accented per locale) and add the conventional PT abbreviation period.
+function formatCompactMonthYear(yyyyMm: string): string {
+	const [year, month] = yyyyMm.split("-").map(Number);
+	const date = new Date(Date.UTC(year, month - 1, 1));
+	const parts = new Intl.DateTimeFormat(intlLocale, {
+		month: "long",
+		year: "numeric",
+		timeZone: "UTC",
+	}).formatToParts(date);
+	const monthPart = parts.find((part) => part.type === "month")?.value ?? "";
+	const yearPart = parts.find((part) => part.type === "year")?.value ?? "";
+	const abbreviatedMonth = monthPart.slice(0, 3);
+	return locale === "pt" ? `${abbreviatedMonth}. ${yearPart}` : `${abbreviatedMonth} ${yearPart}`;
+}
+---
+
+<section
+	id="experience"
+	aria-labelledby="experience-heading"
+	class="mx-auto max-w-3xl border-t border-platinum/15 px-6 py-20 sm:py-24"
+>
+	<h2 id="experience-heading" class="font-display text-2xl font-semibold text-parchment sm:text-3xl">
+		{copy.heading}
+	</h2>
+
+	<div class="mt-10 space-y-12 sm:mt-12">
+		{
+			experience.map((employer) => (
+				<div>
+					<div class="sm:grid sm:grid-cols-[11rem_1fr] sm:gap-x-6">
+						<p class="font-mono text-xs text-taupe">
+							<time datetime={employer.start}>{formatCompactMonthYear(employer.start)}</time>
+							{" – "}
+							{employer.end ? (
+								<time datetime={employer.end}>{formatCompactMonthYear(employer.end)}</time>
+							) : (
+								copy.present
+							)}
+						</p>
+						<h3 class="mt-1 text-lg font-semibold tracking-wide text-parchment sm:mt-0 sm:text-xl">
+							{employer.name} — {employer.role}
+						</h3>
+					</div>
+
+					<div class="mt-6 space-y-8 sm:mt-8">
+						{employer.projects.map((project) => (
+							<div class="sm:grid sm:grid-cols-[11rem_1fr] sm:gap-x-6">
+								<p class="font-mono text-xs text-taupe">
+									<time datetime={project.start}>{formatCompactMonthYear(project.start)}</time>
+									{" – "}
+									{project.end ? (
+										<time datetime={project.end}>{formatCompactMonthYear(project.end)}</time>
+									) : (
+										copy.present
+									)}
+								</p>
+								<div class="mt-1 sm:mt-0">
+									<h4 class="text-base font-medium text-parchment">{project.title[locale]}</h4>
+									<p class="mt-2 max-w-prose text-base leading-relaxed text-taupe sm:text-lg">
+										{project.description[locale]}
+									</p>
+									<p class="mt-2 font-mono text-xs text-taupe">{project.tags.join(" · ")}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			))
+		}
+	</div>
+</section>

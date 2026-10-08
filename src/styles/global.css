@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme {
+	--color-ink: #16140f;
+	--color-parchment: #f5f1e8;
+	--color-taupe: #a8a092;
+	--color-platinum: #c9c0ae;
+	--font-display: "Newsreader", ui-serif, Georgia, serif;
+}
+
+@font-face {
+	font-family: "Newsreader";
+	src: url("/fonts/newsreader-600.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
